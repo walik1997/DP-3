@@ -1,0 +1,22 @@
+#931 Leet code 
+#time complexity - O(m+n)
+#space complexity- O(mn)
+class Solution:
+    def minFallingPathSum(self, matrix: list[list[int]]) -> int:
+        m=len(matrix)
+        n=len(matrix[0])
+        x= [[0]*n for _ in range(m)]
+        for i in range(n):
+            x[0][i]=matrix[0][i]
+        for i in range(1,m):
+            for j in range(n):
+                a=matrix[i][j]
+                if j ==0:
+                    x[i][j]=a+min(x[i-1][j],x[i-1][j+1])
+                    continue
+                if j ==n-1:
+                    x[i][j]=a+min(x[i-1][j],x[i-1][j-1]) 
+                    continue
+                else:
+                    x[i][j]=a+min(x[i-1][j],x[i-1][j-1],x[i-1][j+1])
+        return min(x[m-1])

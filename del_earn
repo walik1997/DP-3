@@ -1,0 +1,18 @@
+#740 Leet code 
+#time complexity - O(m+n)
+#space complexity- O(m)
+#n is the number of elements in nums and m is the maximum value in nums
+
+class Solution:
+    def deleteAndEarn(self, nums):
+        max_val = max(nums)
+        arr = [0] * (max_val + 1)
+        for num in nums:
+            arr[num] += num
+        prev = arr[0]
+        curr = max(arr[0], arr[1])
+        for i in range(2, max_val + 1):
+            temp = curr
+            curr = max(curr, prev + arr[i])
+            prev = temp
+        return curr
